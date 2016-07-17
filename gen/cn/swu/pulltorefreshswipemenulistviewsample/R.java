@@ -22,15 +22,15 @@ public final class R {
 		public static final int iv_icon = 0x7f090061;
 		public static final int listView = 0x7f090015;
 		public static final int tv_name = 0x7f090062;
-		public static final int xlistview_footer_content = 0x7f09007f;
-		public static final int xlistview_footer_hint_textview = 0x7f090081;
-		public static final int xlistview_footer_progressbar = 0x7f090080;
-		public static final int xlistview_header_arrow = 0x7f090085;
+		public static final int xlistview_footer_content = 0x7f090084;
+		public static final int xlistview_footer_hint_textview = 0x7f090086;
+		public static final int xlistview_footer_progressbar = 0x7f090085;
+		public static final int xlistview_header_arrow = 0x7f09008a;
 		public static final int xlistview_header_content = 0x7f090067;
-		public static final int xlistview_header_hint_textview = 0x7f090083;
-		public static final int xlistview_header_progressbar = 0x7f090086;
-		public static final int xlistview_header_text = 0x7f090082;
-		public static final int xlistview_header_time = 0x7f090084;
+		public static final int xlistview_header_hint_textview = 0x7f090088;
+		public static final int xlistview_header_progressbar = 0x7f09008b;
+		public static final int xlistview_header_text = 0x7f090087;
+		public static final int xlistview_header_time = 0x7f090089;
 	}
 	public static final class layout {
 		public static final int activity_list = 0x7f030003;

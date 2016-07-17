@@ -99,27 +99,27 @@ public class EmoticonsUtils {
         }
     }
 
-    public static EmoticonsKeyboardBuilder getSimpleBuilder(Context context) {
-
-        DBHelper dbHelper = new DBHelper(context);
-        ArrayList<EmoticonSetBean> mEmoticonSetBeanList = dbHelper.queryEmoticonSet("emoji", "xhs");
-        dbHelper.cleanup();
-
-        ArrayList<AppBean> mAppBeanList = new ArrayList<AppBean>();
-        String[] funcArray = context.getResources().getStringArray(com.jy.xinlangweibo.R.array.apps_func);
-        String[] funcIconArray = context.getResources().getStringArray(com.jy.xinlangweibo.R.array.apps_func_icon);
-        for (int i = 0; i < funcArray.length; i++) {
-            AppBean bean = new AppBean();
-            bean.setId(i);
-            bean.setIcon(funcIconArray[i]);
-            bean.setFuncName(funcArray[i]);
-            mAppBeanList.add(bean);
-        }
-
-        return new EmoticonsKeyboardBuilder.Builder()
-                .setEmoticonSetBeanList(mEmoticonSetBeanList)
-                .build();
-    }
+//    public static EmoticonsKeyboardBuilder getSimpleBuilder(Context context) {
+//
+//        DBHelper dbHelper = new DBHelper(context);
+//        ArrayList<EmoticonSetBean> mEmoticonSetBeanList = dbHelper.queryEmoticonSet("emoji", "xhs");
+//        dbHelper.cleanup();
+//
+//        ArrayList<AppBean> mAppBeanList = new ArrayList<AppBean>();
+//        String[] funcArray = context.getResources().getStringArray(com.jy.xinlangweibo.R.array.apps_func);
+//        String[] funcIconArray = context.getResources().getStringArray(com.jy.xinlangweibo.R.array.apps_func_icon);
+//        for (int i = 0; i < funcArray.length; i++) {
+//            AppBean bean = new AppBean();
+//            bean.setId(i);
+//            bean.setIcon(funcIconArray[i]);
+//            bean.setFuncName(funcArray[i]);
+//            mAppBeanList.add(bean);
+//        }
+//
+//        return new EmoticonsKeyboardBuilder.Builder()
+//                .setEmoticonSetBeanList(mEmoticonSetBeanList)
+//                .build();
+//    }
 
     public static EmoticonsKeyboardBuilder getBuilder(Context context) {
 

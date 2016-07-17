@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.jy.xinlangweibo.R;
 import com.jy.xinlangweibo.activity.ImageBrowseActivity;
 import com.jy.xinlangweibo.activity.StatusDetailsActivity;
+import com.jy.xinlangweibo.activity.UserInfoActivity;
 import com.jy.xinlangweibo.constant.CustomConstant;
 import com.jy.xinlangweibo.utils.DateUtils;
 import com.jy.xinlangweibo.utils.ImageLoadeOptions;
@@ -94,6 +95,7 @@ public class StatusesAdapter extends BaseAdapter {
 		// 点赞的特殊处理
 		final View ll_status_unlike = vh.getView(R.id.ll_status_unlike);
 		final ImageView status_unlikebtn = vh.getView(R.id.status_unlikebtn);
+
 		ll_status_unlike.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -107,14 +109,30 @@ public class StatusesAdapter extends BaseAdapter {
 
 		// bind data
 		final Status status = getItem(position);
-		User user = status.user;
+		final User user = status.user;
+		statusName.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, UserInfoActivity.class);
+				intent.putExtra("SCREEN_NAME", user.screen_name);
+				context.startActivity(intent);
+			}
+		});
+		headIv.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, UserInfoActivity.class);
+				intent.putExtra("SCREEN_NAME", user.screen_name);
+				context.startActivity(intent);
+			}
+		});
 
 		View itemStatus = vh.getView(R.id.ll_item_status);
 		itemStatus.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-//				前往微博详情界面
+				// 前往微博详情界面
 				Intent intent = new Intent(context, StatusDetailsActivity.class);
 				intent.putExtra("Status", status);
 				context.startActivity(intent);
@@ -176,12 +194,13 @@ public class StatusesAdapter extends BaseAdapter {
 		if (pic_ids != null && pic_ids.size() > 1) {
 			iv.setVisibility(View.GONE);
 			gv.setVisibility(View.VISIBLE);
-			gv.setOnItemClickListener(new OnItemClickListener()  {
+			gv.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-//					前往图片浏览器
-					Intent intent = new Intent(context, ImageBrowseActivity.class);
+					// 前往图片浏览器
+					Intent intent = new Intent(context,
+							ImageBrowseActivity.class);
 					intent.putExtra("Pic_urls", status.pic_urls);
 					intent.putExtra("Position", position);
 					context.startActivity(intent);
@@ -214,18 +233,36 @@ public class StatusesAdapter extends BaseAdapter {
 						public void onLoadingComplete(String imageUri,
 								View view, Bitmap loadedImage) {
 							Log.i("statusadapter",
-									"宽度：" + String.valueOf(loadedImage.getWidth()));
+									"宽度："
+											+ String.valueOf(loadedImage
+													.getWidth()));
 							Log.i("statusadapter",
-									"高度：" + String.valueOf(loadedImage.getHeight()));
+									"高度："
+											+ String.valueOf(loadedImage
+													.getHeight()));
 							LayoutParams lp = view.getLayoutParams();
-							int max = Math.max(loadedImage.getWidth(),  loadedImage.getHeight());
-							if( max>Utils.dip2px(CustomConstant.getContext(), MAXIMAGE) ) {
-								if(loadedImage.getWidth() == max) {
-									lp.width = Utils.dip2px(CustomConstant.getContext(), MAXIMAGE);
-									lp.height = Utils.dip2px(CustomConstant.getContext(), MAXIMAGE)*loadedImage.getHeight()/loadedImage.getWidth();
-								}else {
-									lp.height = Utils.dip2px(CustomConstant.getContext(), MAXIMAGE);
-									lp.width = Utils.dip2px(CustomConstant.getContext(), MAXIMAGE)*loadedImage.getWidth()/loadedImage.getHeight();
+							int max = Math.max(loadedImage.getWidth(),
+									loadedImage.getHeight());
+							if (max > Utils.dip2px(CustomConstant.getContext(),
+									MAXIMAGE)) {
+								if (loadedImage.getWidth() == max) {
+									lp.width = Utils.dip2px(
+											CustomConstant.getContext(),
+											MAXIMAGE);
+									lp.height = Utils.dip2px(
+											CustomConstant.getContext(),
+											MAXIMAGE)
+											* loadedImage.getHeight()
+											/ loadedImage.getWidth();
+								} else {
+									lp.height = Utils.dip2px(
+											CustomConstant.getContext(),
+											MAXIMAGE);
+									lp.width = Utils.dip2px(
+											CustomConstant.getContext(),
+											MAXIMAGE)
+											* loadedImage.getWidth()
+											/ loadedImage.getHeight();
 								}
 							} else {
 								lp.height = loadedImage.getHeight();
@@ -250,11 +287,12 @@ public class StatusesAdapter extends BaseAdapter {
 						}
 					});
 			iv.setOnClickListener(new OnClickListener() {
-				
-//				点击跳转至图片浏览器
+
+				// 点击跳转至图片浏览器
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(context, ImageBrowseActivity.class);
+					Intent intent = new Intent(context,
+							ImageBrowseActivity.class);
 					intent.putExtra("Pic_urls", status.pic_urls);
 					context.startActivity(intent);
 				}

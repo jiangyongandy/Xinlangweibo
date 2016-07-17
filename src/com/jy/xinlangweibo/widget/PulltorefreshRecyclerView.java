@@ -80,7 +80,7 @@ public class PulltorefreshRecyclerView extends RecyclerView {
 	private void init(Context context) {
 		mScroller = new Scroller(context, new DecelerateInterpolator());
 		// init header view
-		mheadBackground = findViewById(R.id.headBackground);
+		mheadBackground = findViewById(R.id.iv_headBackground);
 
 		// init footer view
 		mFooterView = new PullToRefreshListFooter(context);

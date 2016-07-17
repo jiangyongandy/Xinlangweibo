@@ -212,6 +212,14 @@ public class ProfileFragment extends BaseFragment {
 				}
 
 			}
+
+			@Override
+			public void onBindHeadViewHolder(
+					android.support.v7.widget.RecyclerView.ViewHolder viewHolder,
+					ParallaxRecyclerAdapter<Status> adapter) {
+				// TODO Auto-generated method stub
+				
+			}
 			
 		};
 

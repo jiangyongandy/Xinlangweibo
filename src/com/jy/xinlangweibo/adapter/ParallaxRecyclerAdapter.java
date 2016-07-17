@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,16 @@ public abstract class ParallaxRecyclerAdapter<T> extends
 	public abstract void onBindViewHolderImpl(
 			RecyclerView.ViewHolder viewHolder,
 			ParallaxRecyclerAdapter<T> adapter, int i);
+
+	/**
+	 * recycleview 头布局数据绑定回调接口
+	 * 
+	 * @param viewHolder
+	 * @param adapter
+	 */
+	public abstract void onBindHeadViewHolder(
+			RecyclerView.ViewHolder viewHolder,
+			ParallaxRecyclerAdapter<T> adapter);
 
 	public abstract RecyclerView.ViewHolder onCreateViewHolderImpl(
 			ViewGroup viewGroup, ParallaxRecyclerAdapter<T> adapter, int i);
@@ -62,7 +73,8 @@ public abstract class ParallaxRecyclerAdapter<T> extends
 		void onParallaxScroll(float percentage, float offset, View parallax);
 	}
 
-	private List<T> mData;
+	// 数据集合
+	protected List<T> mData;
 	private CustomRelativeWrapper mHeader;
 	private OnClickEvent mOnClickEvent;
 	private OnParallaxScroll mParallaxScroll;
@@ -101,7 +113,8 @@ public abstract class ParallaxRecyclerAdapter<T> extends
 			if (holder != null) {
 				left = Math
 						.min(1,
-								((ofCalculated) / ((mHeader.getHeight()-Utils.dip2px(CustomConstant.getContext(), 48)) * mScrollMultiplier)));
+								((ofCalculated) / ((mHeader.getHeight() - Utils
+										.dip2px(CustomConstant.getContext(), 48)) * mScrollMultiplier)));
 			} else {
 				left = 1;
 			}
@@ -110,7 +123,7 @@ public abstract class ParallaxRecyclerAdapter<T> extends
 	}
 
 	/**
-	 * Set the view as header.
+	 * 设置头布局接口 Set the view as header.
 	 * 
 	 * @param header
 	 *            The inflated header
@@ -152,18 +165,23 @@ public abstract class ParallaxRecyclerAdapter<T> extends
 	// 这里对onbind特殊处理 主要是在recyleview 有headview时与dataset下标对应
 	@Override
 	public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
-		if (i != 0 && mHeader != null) {
-			onBindViewHolderImpl(viewHolder, this, i - 1);
-		} else if (i != 0) {
+		if (mHeader != null) {
+			if (0 == i) {
+				onBindHeadViewHolder(viewHolder, this);
+			} else {
+				onBindViewHolderImpl(viewHolder, this, i - 1);
+			}
+		} else {
 			onBindViewHolderImpl(viewHolder, this, i);
 		}
 	}
 
+	// 此处的i为viewtype
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup,
 			final int i) {
 		if (i == VIEW_TYPES.HEADER && mHeader != null)
-			return new ViewHolder(mHeader);
+			return new HeadViewHolder(mHeader);
 		if (i == VIEW_TYPES.FIRST_VIEW && mHeader != null
 				&& mRecyclerView != null) {
 			final RecyclerView.ViewHolder holder = mRecyclerView
@@ -216,7 +234,7 @@ public abstract class ParallaxRecyclerAdapter<T> extends
 		mParallaxScroll.onParallaxScroll(0, 0, mHeader);
 	}
 
-	 protected ImageLoader imageLoader;
+	protected ImageLoader imageLoader;
 
 	public ParallaxRecyclerAdapter(List<T> data) {
 		mData = data;
@@ -256,20 +274,35 @@ public abstract class ParallaxRecyclerAdapter<T> extends
 		return position == 0 ? VIEW_TYPES.HEADER : VIEW_TYPES.NORMAL;
 	}
 
-	private  class ViewHolder extends RecyclerView.ViewHolder {
+	public class HeadViewHolder extends RecyclerView.ViewHolder {
 		private View head;
 		private View headBackground;
+		private SparseArray<View> mlistViews = new SparseArray<>();
+		private View mconvertView;
 
-		public ViewHolder(View itemView) {
+		public HeadViewHolder(View itemView) {
 			super(itemView);
+			mconvertView = itemView;
 			head = itemView.findViewById(R.id.head);
-			headBackground = itemView.findViewById(R.id.headBackground);
+			headBackground = itemView.findViewById(R.id.iv_headBackground);
 			if (mRecyclerView.getMheadView() == null) {
 				mRecyclerView.setMheadView(head);
 			}
 			if (mRecyclerView.getMheadBackground() == null) {
 				mRecyclerView.setMheadBackground(headBackground);
 			}
+		}
+
+		public <T extends View> T getView(int id) {
+			View view;
+			view = mlistViews.get(id);
+			if (view == null) {
+				if (mconvertView != null) {
+					view = mconvertView.findViewById(id);
+					mlistViews.put(id, view);
+				}
+			}
+			return (T) view;
 		}
 	}
 

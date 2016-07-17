@@ -1,8 +1,6 @@
 package com.jy.xinlangweibo.adapter;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
@@ -10,7 +8,6 @@ import android.view.View;
 public class RecyleViewHolder extends RecyclerView.ViewHolder {
 	
 	private SparseArray<View> mlistViews;
-	private Context mcontext;
 	private View mconvertView;
 	private static  RecyleViewHolder mvh;
 

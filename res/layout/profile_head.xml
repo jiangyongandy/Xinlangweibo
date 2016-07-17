@@ -7,24 +7,59 @@
     android:gravity="bottom" >
 
     <ImageView
-        android:id="@+id/headBackground"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/iv_headBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
         android:scaleType="centerCrop"
         android:src="@drawable/beautifulrichu" />
 
     <RelativeLayout
         android:id="@+id/xlistview_header_content"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="200dp" >
+        android:layout_height="270dp"
+        android:layout_alignParentBottom="true" >
 
         <ImageView
+            android:id="@+id/iv_userhead"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
             android:src="@drawable/avatar_default" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_userinfo_info"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:text="个性签名。。。。。" />
+
+        <LinearLayout
+            android:id="@+id/ll_userinfo_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/iv_userhead"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_follows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="粉丝数" />
+
+            <TextView
+                android:id="@+id/tv_mentions"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关注数" />
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>

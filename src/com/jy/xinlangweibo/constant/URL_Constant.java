@@ -8,5 +8,6 @@ public interface URL_Constant {
 	String UPDATE_URL = BASE_URL+"statuses/update.json";
 	String ip_to_geo_URL = BASE_URL+"location/geo/ip_to_geo.json";
 	String place_nearby_timeline_URL= BASE_URL+"place/nearby_timeline.json";
+	String users_show_URL= BASE_URL+"users/show.json";
 	
 }

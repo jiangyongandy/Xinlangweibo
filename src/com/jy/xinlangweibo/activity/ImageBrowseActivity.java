@@ -78,6 +78,7 @@ public class ImageBrowseActivity extends Activity {
 		
 //		第一次进入界面 隐藏浮动栏
 		showOrHide();
+		tv_ivbrowse.setText("/"+(pic_urls.size()));
 		vp_imagebrowse.setAdapter(new ImageBrowseAdapter());
 		vp_imagebrowse.setCurrentItem(position);
 		vp_imagebrowse.addOnPageChangeListener(new OnPageChangeListener() {

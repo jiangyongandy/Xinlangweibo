@@ -15,7 +15,7 @@ public final class R {
 		public static final int et_string_input = 0x7f090027;
 		public static final int iv_bitmap_res = 0x7f09001e;
 		public static final int iv_drawable_res = 0x7f09001f;
-		public static final int menu_settings = 0x7f090087;
+		public static final int menu_settings = 0x7f09008c;
 		public static final int text = 0x7f090020;
 		public static final int textView1 = 0x7f09000e;
 		public static final int tv_jsonarray_original = 0x7f090021;

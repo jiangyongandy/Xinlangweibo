@@ -67,12 +67,37 @@ public class MyWeiboapi extends AbsOpenAPI {
         params.put("coordinate", coordinate);    	
     	requestAsync(URL_Constant.place_nearby_timeline_URL, params, HTTPMETHOD_GET, listener);
     }
+    /**
+     * @param page
+     * @param lat
+     * @param lon
+     * @param listener
+     */
     public void nearby_timeline(int page,String lat, String lon,RequestListener listener ) {
     	WeiboParameters params = new WeiboParameters(mAppKey);
     	params.put("page", page);
         params.put("lat", lat);
         params.put("long", lon);
     	requestAsync(URL_Constant.place_nearby_timeline_URL, params, HTTPMETHOD_GET, listener);
+    }
+    /**
+     * 请求用户信息
+     * @param uid
+     * @param screen_name
+     * @param listener
+     */
+    public void users_show(int uid,String screen_name, RequestListener listener ) {
+    	WeiboParameters params = new WeiboParameters(mAppKey);
+    	if(0 == uid) {
+    		params.put("screen_name", screen_name);
+    	}else if (null == screen_name) {
+    		params.put("uid", uid);
+    	}else if (0 == uid && null == screen_name) {
+    		System.out.println("参数错误");
+    	} else {
+    		params.put("uid", uid);
+    	}
+    	requestAsync(URL_Constant.users_show_URL, params, HTTPMETHOD_GET, listener);
     }
     
     // 组装微博请求参数
