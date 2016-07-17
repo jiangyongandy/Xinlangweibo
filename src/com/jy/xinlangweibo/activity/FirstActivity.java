@@ -12,6 +12,8 @@ import com.jy.xinlangweibo.utils.EmoticonsUtils;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 
 public class FirstActivity extends BaseActivity {
+	
+//	验证GIT是否标注代码更改
 	protected static final int What_Intent2Login = 0;
 	protected static final int What_Intent2Main = 1;
 //	处理消息的间隔  即开始页的持续时间
